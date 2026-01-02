@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useCartStore } from '@/store/cartStore';
 import { ShoppingCart, Menu, Search } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Header() {
   const totalItems = useCartStore((state) => state.getTotalItems());
@@ -12,23 +13,18 @@ export default function Header() {
   return (
     <>
       {/* Announcement Bar */}
-      <div className="bg-gradient-to-r from-red-500 to-red-600 text-white text-center py-3 px-4">
+      <div className="bg-[#70542c] text-white text-center py-3 px-4">
         <p className="text-sm md:text-base font-semibold">
-          Free Shipping on Orders Over $49.99
+          Now offering Free Shipping NATIONWIDE
         </p>
       </div>
 
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <nav className="container mx-auto px-4 py-3 md:py-4">
+      <header className="bg-white shadow-sm top-0 z-50">
+        <nav className="container mx-auto px-4 py-6 md:py-4">
           <div className="flex items-center justify-between">
             {/* Logo - Left aligned on all screens */}
-            <Link 
-              href="/" 
-              className="text-xl md:text-2xl font-bold text-red-600 hover:text-red-700 transition-colors"
-            >
-              MensConfidence.pk
-            </Link>
+            <Image src="/menconf-log-res.png" alt="MensConfidence.pk Logo" width={180} height={60} />
             
             {/* Desktop Navigation - Hidden on mobile */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">

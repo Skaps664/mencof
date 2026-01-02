@@ -3,17 +3,18 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Check, Star, Shield, Truck, ArrowRight, ChevronDown, Award, Facebook, Instagram, Music, Plus, HelpCircle } from 'lucide-react';
+import { Check, Star, Shield, Truck, ArrowRight, ChevronDown, Award } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { graphQLClient, GET_PRODUCTS_QUERY, CREATE_CART_QUERY, ADD_TO_CART_QUERY } from '@/lib/shopify-graphql';
 import toast, { Toaster } from 'react-hot-toast';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const [product, setProduct] = useState<any>(null);
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
-  const [deliveryOption, setDeliveryOption] = useState('monthly');
+  const [deliveryOption, setDeliveryOption] = useState('single');
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const { addItem, cartId, setCartId, setCheckoutUrl } = useCartStore();
@@ -88,9 +89,9 @@ export default function Home() {
   const price = parseFloat(selectedVariant?.priceV2.amount || 0);
 
   const deliveryOptions = [
-    { id: 'monthly', label: 'Monthly Delivery', months: 1, discount: 10, price: price * 0.9 },
-    { id: '2month', label: '2-Month Delivery', months: 2, discount: 15, price: price * 0.85 },
-    { id: '3month', label: '3-Month Delivery', months: 3, discount: 20, price: price * 0.8 },
+    { id: 'single', label: 'Buy Single', quantity: 1, discount: 0, price: 2400, originalPrice: 2400 },
+    { id: 'pack2', label: 'Pack of Two', quantity: 2, discount: 8, price: 4400, originalPrice: 4800 },
+    { id: 'pack3', label: 'Pack of Three', quantity: 3, discount: 8, price: 6600, originalPrice: 7200 },
   ];
 
   const testimonials = [
@@ -113,42 +114,82 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#ffdfc5] ">
       <Toaster position="top-right" />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-purple-50 to-white">
-        <div className="container mx-auto px-4 py-8 lg:py-12">
+      <section className="">
+        <div className="container mx-auto px-4 py-4 lg:py-12">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:grid lg:grid-cols-[500px_1fr] gap-8 lg:gap-12">
-              {/* Product Info - Shows first on mobile */}
+              {/* Product Info - Order 1 on desktop, split on mobile */}
               <div className="space-y-5 lg:order-2">
-                {/* Category Badge */}
-                <div>
-                  <span className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">
-                    Men's Health
+                {/* Category Badge - Shows 1st on mobile */}
+                <div className='flex flex-row gap-2'>
+                  <span className="inline-block bg-[#70542c] text-white text-xs font-semibold px-3 py-1">
+                    20's Child Lock
+                  </span>
+                  <span className="inline-block bg-[#70542c] text-white text-xs font-semibold px-3 py-1">
+                    Adult
                   </span>
                 </div>
 
-                {/* Title */}
+                {/* Title & Description - Shows 2nd on mobile */}
                 <div>
-                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
-                    Electingo Tablets
+                  <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-3">
+                    Tablets :  Electingo
                   </h1>
-                  <p className="text-lg text-gray-700 leading-relaxed">
+                  <p className="text-lg text-gray-700">
                     Premium formula with amino acids, herbal extracts, and essential minerals to support male vitality, energy, stamina, and reproductive health.
                   </p>
                 </div>
 
-                {/* Delivery Options */}
+                {/* Product Images - Shows 3rd on mobile (moved here for mobile) */}
+                <div className="lg:hidden">
+                  <div className="relative">
+                    
+
+                    {/* Main Image */}
+                    <div className="relative h-[350px]  rounded-2xl overflow-hidden shadow-lg">
+                      {images[activeImage] && (
+                        <Image
+                          src={images[activeImage].url}
+                          alt={product.title}
+                          fill
+                          className="object-contain"
+                          priority
+                        />
+                      )}
+                    </div>
+
+                    {/* Thumbnail Images */}
+                    {images.length > 1 && (
+                      <div className="flex gap-3 mt-4">
+                        {images.slice(0, 4).map((img: any, idx: number) => (
+                          <button
+                            key={idx}
+                            onClick={() => setActiveImage(idx)}
+                            className={`relative h-20 w-20 bg-white rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${
+                            idx === activeImage ? 'border-[#70542c] shadow-md' : 'border-gray-200 hover:border-[#8b6f47]'
+                            }`}
+                          >
+                            <Image src={img.url} alt={`Thumbnail ${idx + 1}`} fill className="object-contain p-2" />
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Delivery Options - Shows 4th on mobile, after images */}
                 <div className="space-y-3">
                   {deliveryOptions.map((option) => (
                     <label
                       key={option.id}
                       className={`block relative cursor-pointer border-2 rounded-xl p-4 transition-all ${
                         deliveryOption === option.id
-                          ? 'border-purple-600 bg-purple-50'
-                          : 'border-gray-200 hover:border-purple-300 bg-white'
+                          ? 'border-[#70542c] bg-[#f5e6d3]'
+                          : 'border-gray-200 hover:border-[#8b6f47] bg-white'
                       }`}
                     >
                       <input
@@ -162,17 +203,17 @@ export default function Home() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                            deliveryOption === option.id ? 'border-purple-600' : 'border-gray-300'
+                            deliveryOption === option.id ? 'border-[#70542c]' : 'border-gray-300'
                           }`}>
                             {deliveryOption === option.id && (
-                              <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+                              <div className="w-3 h-3 bg-[#70542c] rounded-full"></div>
                             )}
                           </div>
                           <div>
                             <p className="font-semibold text-gray-900">{option.label}</p>
                             <p className="text-sm text-gray-600">
-                              {option.months}-month supply delivered every {option.months} month{option.months > 1 ? 's' : ''}.<br/>
-                              Free shipping. Pause or cancel anytime.
+                              {option.quantity} bottle{option.quantity > 1 ? 's' : ''} • {option.quantity * 20} tablets total
+                              {option.quantity > 1 && <><br/>Save PKR {option.originalPrice - option.price} with this pack</>}
                             </p>
                           </div>
                         </div>
@@ -183,11 +224,13 @@ export default function Home() {
                             </span>
                           )}
                           <p className="text-2xl font-bold text-gray-900">
-                            PKR {option.price.toFixed(2)}
+                            PKR {option.price.toLocaleString()}
                           </p>
-                          <p className="text-sm text-gray-500 line-through">
-                            PKR {price.toFixed(2)}
-                          </p>
+                          {option.discount > 0 && (
+                            <p className="text-sm text-gray-500 line-through">
+                              PKR {option.originalPrice.toLocaleString()}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </label>
@@ -197,97 +240,97 @@ export default function Home() {
                 {/* Add to Cart Button */}
                 <button
                   onClick={handleAddToCart}
-                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  className="w-full bg-gradient-to-r from-[#70542c] to-[#5a4423] text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-[#5a4423] hover:to-[#4a3619] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                   Add to Cart
                 </button>
 
-                {/* One-time Purchase */}
+                {/* Free Shipping */}
                 <div className="text-center">
-                  <button className="text-purple-600 font-medium hover:underline">
-                    Buy Once for PKR {price.toFixed(2)} + PKR 99 shipping
-                  </button>
+                  <p className="text-[#70542c] font-semibold">
+                    ✓ Free Shipping on all orders
+                  </p>
                 </div>
 
-                {/* Subscription Benefits */}
-                <div className="bg-gradient-to-br from-purple-50 to-white rounded-xl p-5 space-y-3">
-                  <p className="font-semibold text-gray-900 mb-3">Your subscription includes:</p>
+                {/* Pack Benefits */}
+                <div className="bg-gradient-to-br from-[#f5e6d3] to-white rounded-xl p-5 space-y-3">
+                  <p className="font-semibold text-gray-900 mb-3">Your purchase includes:</p>
                   <div className="space-y-2">
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-4 h-4 text-purple-600" />
+                      <div className="w-6 h-6 bg-[#f5e6d3] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check className="w-4 h-4 text-[#70542c]" />
                       </div>
                       <p className="text-sm text-gray-700">
-                        <strong>Time savings and convenience</strong> of automatic deliveries
+                        <strong>Free delivery</strong> across Pakistan
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-4 h-4 text-purple-600" />
+                      <div className="w-6 h-6 bg-[#f5e6d3] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check className="w-4 h-4 text-[#70542c]" />
                       </div>
                       <p className="text-sm text-gray-700">
-                        <strong>Exclusive discounts</strong> with Subscribe & Save pricing
+                        <strong>Save more</strong> when you buy multiple packs
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-4 h-4 text-purple-600" />
+                      <div className="w-6 h-6 bg-[#f5e6d3] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check className="w-4 h-4 text-[#70542c]" />
                       </div>
                       <p className="text-sm text-gray-700">
-                        <strong>Benefits of wellness support</strong> and consistent vitamin routine
+                        <strong>Premium quality</strong> scientifically formulated supplements
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Product Images - Shows second on mobile */}
-              <div className="relative lg:order-1">
-              {/* Award Badge */}
-              <div className="absolute top-4 left-4 z-10 bg-gradient-to-br from-yellow-400 to-orange-500 text-white rounded-full p-4 shadow-lg">
-                <Award className="w-8 h-8" />
-                <div className="text-center mt-1">
-                  <p className="text-xs font-bold leading-tight">Clean<br/>Label<br/>Award</p>
+              {/* Product Images - Desktop only (hidden on mobile) */}
+              <div className="relative lg:order-1 hidden lg:block">
+                {/* Award Badge */}
+                <div className="absolute top-4 left-4 z-10 bg-gradient-to-br from-yellow-400 to-orange-500 text-white rounded-full p-4 shadow-lg">
+                  <Award className="w-8 h-8" />
+                  <div className="text-center mt-1">
+                    <p className="text-xs font-bold leading-tight">Clean<br/>Label<br/>Award</p>
+                  </div>
                 </div>
-              </div>
 
-              {/* Main Image */}
-              <div className="relative h-[350px] md:h-[450px] bg-gradient-to-br from-purple-100 to-white rounded-2xl overflow-hidden shadow-lg">
-                {images[activeImage] && (
-                  <Image
-                    src={images[activeImage].url}
-                    alt={product.title}
-                    fill
-                    className="object-contain p-8"
-                    priority
-                  />
+                {/* Main Image */}
+                <div className="relative h-[450px] bg-gradient-to-br from-purple-100 to-white rounded-2xl overflow-hidden shadow-lg">
+                  {images[activeImage] && (
+                    <Image
+                      src={images[activeImage].url}
+                      alt={product.title}
+                      fill
+                      className="object-contain p-8"
+                      priority
+                    />
+                  )}
+                </div>
+
+                {/* Thumbnail Images */}
+                {images.length > 1 && (
+                  <div className="flex gap-3 mt-4">
+                    {images.slice(0, 4).map((img: any, idx: number) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveImage(idx)}
+                        className={`relative h-20 w-20 bg-white rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${
+                          idx === activeImage ? 'border-[#70542c] shadow-md' : 'border-gray-200 hover:border-[#8b6f47]'
+                        }`}
+                      >
+                        <Image src={img.url} alt={`Thumbnail ${idx + 1}`} fill className="object-contain p-2" />
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
-
-              {/* Thumbnail Images */}
-              {images.length > 1 && (
-                <div className="flex gap-3 mt-4">
-                  {images.slice(0, 4).map((img: any, idx: number) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveImage(idx)}
-                      className={`relative h-20 w-20 bg-white rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${
-                        idx === activeImage ? 'border-purple-600 shadow-md' : 'border-gray-200 hover:border-purple-300'
-                      }`}
-                    >
-                      <Image src={img.url} alt={`Thumbnail ${idx + 1}`} fill className="object-contain p-2" />
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Product Details Accordion */}
-      <section className="bg-gradient-to-br from-orange-50 via-orange-100 to-orange-50 py-12 md:py-16">
+      <section className=" py-12 md:py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="space-y-3">
             {/* Overview */}
@@ -297,7 +340,7 @@ export default function Home() {
                 className="w-full flex items-center justify-between p-5 md:p-6 text-left hover:bg-gray-50 transition-colors"
               >
                 <h3 className="text-xl md:text-2xl font-bold text-gray-700">Overview</h3>
-                <div className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center transition-transform ${
+                <div className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#ffdfc5] to-[#70542c] flex items-center justify-center transition-transform ${
                   openAccordion === 'overview' ? 'rotate-45' : ''
                 }`}>
                   <span className="text-white text-2xl md:text-3xl font-light">+</span>
@@ -322,7 +365,7 @@ export default function Home() {
                 className="w-full flex items-center justify-between p-5 md:p-6 text-left hover:bg-gray-50 transition-colors"
               >
                 <h3 className="text-xl md:text-2xl font-bold text-gray-700">Supplement Facts</h3>
-                <div className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center transition-transform ${
+                <div className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#ffdfc5] to-[#70542c] flex items-center justify-center transition-transform ${
                   openAccordion === 'facts' ? 'rotate-45' : ''
                 }`}>
                   <span className="text-white text-2xl md:text-3xl font-light">+</span>
@@ -387,7 +430,7 @@ export default function Home() {
                 className="w-full flex items-center justify-between p-5 md:p-6 text-left hover:bg-gray-50 transition-colors"
               >
                 <h3 className="text-xl md:text-2xl font-bold text-gray-700">How to Use</h3>
-                <div className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center transition-transform ${
+                <div className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#ffdfc5] to-[#70542c] flex items-center justify-center transition-transform ${
                   openAccordion === 'usage' ? 'rotate-45' : ''
                 }`}>
                   <span className="text-white text-2xl md:text-3xl font-light">+</span>
@@ -417,51 +460,78 @@ export default function Home() {
       </section>
 
       {/* Certification Badges */}
-      <section className="bg-gradient-to-br from-orange-50 via-orange-100 to-orange-50 py-12 md:py-16">
+      <section className="py-6 md:py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            {/* Clean Label Award */}
+            {/* Badge 1 */}
             <div className="flex flex-col items-center">
-              <div className="w-24 h-24 md:w-32 md:h-32 relative">
-                <svg viewBox="0 0 120 120" className="w-full h-full">
-                  <path d="M60 10 L65 35 L90 35 L70 50 L78 75 L60 62 L42 75 L50 50 L30 35 L55 35 Z" fill="#D4AF37" opacity="0.3"/>
-                  <circle cx="60" cy="60" r="45" fill="none" stroke="#C4A000" strokeWidth="2"/>
-                  <text x="60" y="50" textAnchor="middle" className="text-xs md:text-sm font-bold fill-amber-700">clean</text>
-                  <text x="60" y="65" textAnchor="middle" className="text-xs md:text-sm font-bold fill-amber-700">label</text>
-                  <text x="60" y="85" textAnchor="middle" className="text-[10px] md:text-xs fill-amber-600">PURITY AWARD</text>
-                </svg>
+              <div className="relative w-24 h-24 md:w-32 md:h-32">
+                <Image
+                  src="/badges/badge-1.png"
+                  alt="Certification Badge"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </div>
 
-            {/* Certified Vegan */}
+            {/* Badge 2 */}
             <div className="flex flex-col items-center">
-              <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
-                <div className="text-center text-white">
-                  <div className="text-4xl md:text-5xl font-bold">V</div>
-                  <div className="text-[10px] md:text-xs font-semibold mt-1">CERTIFIED</div>
-                  <div className="text-[10px] md:text-xs font-semibold">VEGAN</div>
-                </div>
+              <div className="relative w-24 h-24 md:w-32 md:h-32">
+                <Image
+                  src="/badges/badge-2.png"
+                  alt="Certification Badge"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </div>
 
-            {/* NON GMO */}
+            {/* Badge 3 */}
             <div className="flex flex-col items-center">
-              <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-lg flex items-center justify-center shadow-lg p-3">
-                <div className="text-center">
-                  <div className="text-2xl mb-1">🦋</div>
-                  <div className="text-blue-600 font-bold text-xs md:text-sm">NON GMO</div>
-                  <div className="text-blue-600 font-bold text-[10px] md:text-xs">Project</div>
-                  <div className="text-blue-600 font-bold text-xs md:text-sm">VERIFIED</div>
-                </div>
+              <div className="relative w-24 h-24 md:w-32 md:h-32">
+                <Image
+                  src="/badges/badge-3.png"
+                  alt="Certification Badge"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </div>
 
-            {/* NSF */}
+            {/* Badge 4 */}
             <div className="flex flex-col items-center">
-              <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-lg">
-                <div className="text-white text-center">
-                  <div className="text-5xl md:text-6xl font-bold">NSF</div>
-                </div>
+              <div className="relative w-24 h-24 md:w-32 md:h-32">
+                <Image
+                  src="/badges/badge-4.png"
+                  alt="Certification Badge"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Badge 5 */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-24 h-24 md:w-32 md:h-32">
+                <Image
+                  src="/badges/badge-6.png"
+                  alt="Certification Badge"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Badge 6 */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-24 h-24 md:w-32 md:h-32">
+                <Image
+                  src="/badges/badge-5.png"
+                  alt="Certification Badge"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
@@ -821,9 +891,20 @@ export default function Home() {
       
 
       {/* Final CTA */}
-      
+      <section className="bg-gradient-to-br from-[#70542c] to-[#5a4423] text-white py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-6">Ready to Experience the Difference?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">Join thousands of satisfied customers across Pakistan</p>
+          <button
+            onClick={handleAddToCart}
+            className="bg-white text-[#70542c] px-12 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all shadow-lg inline-flex items-center gap-2"
+          >
+            Add to Cart Now <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </section>
 
-      
+      <Footer />
     </div>
   );
 }
