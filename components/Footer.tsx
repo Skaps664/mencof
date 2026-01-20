@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <>
       {/* Footer */}
-      <footer className="bg-gradient-to-br from-red-500 to-red-600 text-white">
+      <footer className="bg-[#777777]/40 text-black">
         <div className="container mx-auto px-4 py-12 md:py-16">
           <div className="max-w-2xl mx-auto">
             {/* About Us Accordion */}

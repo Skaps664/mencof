@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ 
+  subsets: ["latin"],
+  weight: ['300', '400', '500', '700', '900'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "MensConfidence.pk - Premium Men's Products",
@@ -18,9 +22,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={roboto.className} style={{
+        backgroundImage: `
+          linear-gradient(to right, #999d87 1px, transparent 1px),
+          linear-gradient(to bottom, #999d87 1px, transparent 1px)
+        `,
+        backgroundSize: '50px 50px',
+        backgroundColor: '#A5A991'
+      }}>
         <Header />
-        <main className="min-h-screen bg-gray-50">
+        <main className="min-h-screen">
           {children}
         </main>
         <Footer />
