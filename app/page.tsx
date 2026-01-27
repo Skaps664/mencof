@@ -98,23 +98,22 @@ export default function Home() {
   const price = parseFloat(selectedVariant?.priceV2.amount || 0);
 
   const deliveryOptions = [
-    { id: 'single', label: 'Buy Single', quantity: 1, discount: 0, price: 2400, originalPrice: 2400 },
-    { id: 'pack2', label: 'Pack of Two', quantity: 2, discount: 8, price: 4400, originalPrice: 4800 },
-    { id: 'pack3', label: 'Pack of Three', quantity: 3, discount: 8, price: 6600, originalPrice: 7200 },
+    { id: 'single', label: 'Buy Single', quantity: 1, discount: 0, price: 2500, originalPrice: 2500 },
+    { id: 'pack2', label: 'Pack of Two', quantity: 2, discount: 10, price: 4500, originalPrice: 5000 },
   ];
 
   const testimonials = [
     {
-      quote: "I've been using probiotic supplements to help with digestive issues for a long time. These are by far the best tasting I've had yet!",
-      author: "EndUser"
+      quote: "Electingo ne meri energy aur stamina ko bohot barha diya hai. Roz 1 tablet se farq mehsoos hota hai!",
+      author: "Ali Khan"
     },
     {
-      quote: "These taste great! We love smarty pants vitamins in our house and these live up to our hype.",
-      author: "Shannon K."
+      quote: "Bahut acha product hai. Natural ingredients se bana hai aur koi side effects nahi. Recommended!",
+      author: "Ahmed R."
     },
     {
-      quote: "Amazing product! Has really helped with my energy levels and overall health.",
-      author: "Ahmed M."
+      quote: "Mere liye perfect supplement tha. Vitality wapas aa gayi aur confidence badh gaya.",
+      author: "Usman S."
     }
   ];
 

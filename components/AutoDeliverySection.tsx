@@ -21,13 +21,13 @@ export default function AutoDeliverySection() {
         {/* Content */}
         <div className="relative z-10 px-6 py-12 lg:py-16 lg:px-12 max-w-2xl">
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight mb-4">
-            MAJOR BENEFITS WITH OUR<br />
-            <span className="text-4xl lg:text-5xl xl:text-6xl">Auto-Delivery</span><br />
-            <span className="text-4xl lg:text-5xl xl:text-6xl">Program</span>
+            ELECTINGO KO KYUN<br />
+            <span className="text-4xl lg:text-5xl xl:text-6xl">Choose</span><br />
+            <span className="text-4xl lg:text-5xl xl:text-6xl">Karein</span>
           </h2>
           
           <p className="text-white text-lg lg:text-xl mb-8">
-            Never run out of your favorites again.
+            Apni vitality wapas paen natural tareeqay se.
           </p>
 
           {/* Benefits with Icons */}
@@ -39,7 +39,7 @@ export default function AutoDeliverySection() {
                 </svg>
               </div>
               <p className="text-white text-lg lg:text-xl font-semibold">
-                Save time with easy auto-delivery
+                Natural ingredients se bana
               </p>
             </div>
 
@@ -50,7 +50,7 @@ export default function AutoDeliverySection() {
                 </svg>
               </div>
               <p className="text-white text-lg lg:text-xl font-semibold">
-                Price savings with subscription
+                DRAP approved aur safe
               </p>
             </div>
 
@@ -61,7 +61,7 @@ export default function AutoDeliverySection() {
                 </svg>
               </div>
               <p className="text-white text-lg lg:text-xl font-semibold">
-                Benefits of daily vitamin routine
+                Free delivery poore Pakistan mein
               </p>
             </div>
           </div>
@@ -71,9 +71,9 @@ export default function AutoDeliverySection() {
         <div className="absolute bottom-8 left-6 lg:left-auto lg:right-12 z-20">
           <Link 
             href="#products" 
-            className="inline-block bg-white text-[#DC2626] py-4 px-12 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl"
+            className="inline-block bg-white text-[#463221] py-4 px-12 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl"
           >
-            Shop Now
+            Order Now!
           </Link>
         </div>
       </div>

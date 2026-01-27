@@ -35,13 +35,13 @@ export default function Header() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               <Link href="/#benefits" className="text-gray-900 hover:text-[#70542c] transition-colors font-medium text-sm">
-                Benefits
+                Fayde
               </Link>
               <Link href="/#reviews" className="text-gray-900 hover:text-[#70542c] transition-colors font-medium text-sm">
                 Reviews
               </Link>
               <Link href="/about" className="text-gray-900 hover:text-[#70542c] transition-colors font-medium text-sm">
-                Contact
+                Rabta
               </Link>
             </div>
 

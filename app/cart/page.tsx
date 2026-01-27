@@ -16,7 +16,7 @@ export default function CartPage() {
         <p className="text-gray-600 mb-8">Add some products to get started!</p>
         <Link
           href="/products"
-          className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
+          className="bg-[#70542c] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#5c4423] transition-colors inline-block"
         >
           Browse Products
         </Link>
@@ -103,14 +103,14 @@ export default function CartPage() {
             {checkoutUrl ? (
               <a
                 href={checkoutUrl}
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors block text-center"
+                className="w-full bg-[#70542c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#5c4423] transition-colors block text-center"
               >
                 Proceed to Checkout
               </a>
             ) : (
               <button
                 onClick={() => alert('Please add items using the "Add to Cart" button on product pages to enable Shopify checkout')}
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="w-full bg-[#70542c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#5c4423] transition-colors"
               >
                 Proceed to Checkout
               </button>
@@ -118,7 +118,7 @@ export default function CartPage() {
 
             <Link
               href="/products"
-              className="block text-center text-blue-600 mt-4 hover:underline"
+              className="block text-center text-[#70542c] mt-4 hover:underline"
             >
               Continue Shopping
             </Link>

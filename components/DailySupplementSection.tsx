@@ -7,7 +7,7 @@ export default function DailySupplementSection() {
             {/* Left Side - Title */}
             <div className="lg:pr-8">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#345035] leading-tight mb-4">
-                Daily Supplement
+                Key Ingredients
               </h2>
               <p className="text-2xl md:text-3xl font-bold text-[#345035] uppercase">
                 INCLUDING
@@ -28,10 +28,10 @@ export default function DailySupplementSection() {
                 </div>
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                    Clinically-Studied DE111<sup>®</sup>
+                    L-Carnitine 40mg
                   </h3>
                   <p className="text-gray-700 text-base md:text-lg">
-                    Supports a Balanced Gut Microbiome & Immune System<sup>*</sup>
+                    Energy production aur fat metabolism ko support karta hai*
                   </p>
                 </div>
               </div>
@@ -49,10 +49,10 @@ export default function DailySupplementSection() {
                 </div>
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                    Clinically-Studied LactoSpore<sup>®</sup>
+                    L-Arginine 100mg
                   </h3>
                   <p className="text-gray-700 text-base md:text-lg">
-                    for Digestive Health<sup>*</sup>
+                    Blood flow aur nitric oxide production ko behtar karta hai*
                   </p>
                 </div>
               </div>
@@ -67,10 +67,10 @@ export default function DailySupplementSection() {
                 </div>
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                    Clinically-Studied M-Gard<sup>®</sup>
+                    Tribulus Terrestris 250mg
                   </h3>
                   <p className="text-gray-700 text-base md:text-lg">
-                    Prebiotics
+                    Natural testosterone support aur vitality ko barhata hai*
                   </p>
                 </div>
               </div>

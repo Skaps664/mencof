@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react';
+import CertificationBadges from './CertificationBadges';
 
 interface ProductDetailsAccordionProps {
   openAccordion: string | null;
@@ -30,9 +31,12 @@ export default function ProductDetailsAccordion({ openAccordion, setOpenAccordio
                 <p className="mb-4 mt-4">
                   Electingo Tablet is a scientifically formulated blend of amino acids, herbal extracts, antioxidants, and essential minerals designed to support male vitality, energy, stamina, and reproductive health.
                 </p>
-                <p>
+                <p className="mb-6">
                   The synergistic combination improves blood circulation, testosterone support, nerve function, and cellular energy, while reducing fatigue and stress. Clinically, these ingredients are known to enhance erectile function, sperm quality, and physical performance, making Electingo a comprehensive natural performance enhancer.
                 </p>
+                
+                {/* Certification Badges */}
+                <CertificationBadges />
               </div>
             </div>
           </div>
@@ -67,7 +71,7 @@ export default function ProductDetailsAccordion({ openAccordion, setOpenAccordio
                   </div>
                   <div className="grid grid-cols-2 gap-4 py-2 hover:bg-gray-50">
                     <p className="text-gray-700">Tribulus terrestris</p>
-                    <p className="text-right text-gray-900 font-medium">50 mg</p>
+                    <p className="text-right text-gray-900 font-medium">250 mg</p>
                   </div>
                   <div className="grid grid-cols-2 gap-4 py-2 hover:bg-gray-50">
                     <p className="text-gray-700">Yohimbine</p>
@@ -120,15 +124,15 @@ export default function ProductDetailsAccordion({ openAccordion, setOpenAccordio
                 <div className="space-y-4 mt-4">
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <p className="font-semibold text-gray-900 mb-2">Dosage:</p>
-                    <p className="text-gray-700">Take 1 tablet daily or as directed by your healthcare professional.</p>
+                    <p className="text-gray-700">Roz 1 tablet pani ke saath, breakfast ke baad. Zyada mat lein.</p>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <p className="font-semibold text-gray-900 mb-2">Best Time:</p>
-                    <p className="text-gray-700">Take with a meal for optimal absorption.</p>
+                    <p className="text-gray-700">Breakfast ke baad lene se best results milte hain.</p>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <p className="font-semibold text-gray-900 mb-2">Storage:</p>
-                    <p className="text-gray-700">Store at cool and dry place. Keep out of the reach of children. Do not keep in direct sunlight.</p>
+                    <p className="text-gray-700">Thandi aur suki jagah store karein. Bachon ki pahunch se door rakhein. Direct sunlight mein na rakhein.</p>
                   </div>
                 </div>
               </div>

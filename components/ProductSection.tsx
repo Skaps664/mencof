@@ -12,9 +12,8 @@ interface ProductSectionProps {
 }
 
 const deliveryOptions = [
-  { id: 'single', label: 'Buy Single', quantity: 1, discount: 0, price: 2400, originalPrice: 2400 },
-  { id: 'pack2', label: 'Pack of Two', quantity: 2, discount: 8, price: 4400, originalPrice: 4800 },
-  { id: 'pack3', label: 'Pack of Three', quantity: 3, discount: 8, price: 6600, originalPrice: 7200 },
+  { id: 'single', label: 'Buy Single', quantity: 1, discount: 0, price: 2500, originalPrice: 2500 },
+  { id: 'pack2', label: 'Pack of Two', quantity: 2, discount: 10, price: 4500, originalPrice: 5000 },
 ];
 
 export default function ProductSection({
@@ -53,7 +52,7 @@ export default function ProductSection({
                   Electingo
                 </h1>
                 <p className="text-lg text-gray-700 text-center">
-                  Premium formula with amino acids, herbal extracts, and essential minerals to support male vitality, energy, stamina, and reproductive health.
+                  Amino acids, herbal extracts, antioxidants aur essential minerals se bana premium formula jo mardon ki vitality, energy, stamina aur reproductive health ko support karta hai.
                 </p>
               </div>
 
